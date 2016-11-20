@@ -1,26 +1,36 @@
 /**
- * Created by Nikita on 18.11.2016.
- * Шифрует информацию по методу Юлия Цезаря.
+ * Encrypts the information according to the method of Julius Caesar.
  */
 
-var alphabet = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я, ";
-var ARR = alphabet.split(',');
+const alphabet = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я, ";
+const ARR = alphabet.split(',');
 
-
-function coding(text, int) {
+/**
+ *  Encryption text.
+ * @param text The text you want to encryption.
+ * @param mixing The number you want to mixing alphabet for encryption.
+ * @returns {string} The encrypted text.
+ */
+function coding(text, mixing) {
     var arrText = text.split('');
     var out = "";
 
     for (var i = 0; i < text.length; i++) {
         var index = ARR.indexOf(arrText[i]);
-        out = out + ARR[extractedIndex(index,int)];
+        out = out + ARR[mixingIndex(index,mixing)];
     }
     return out;
 }
 
-function extractedIndex(index,int) {
+/**
+ * Get index for mixed alphabet.
+ * @param index not mixed index.
+ * @param mixing on much want mixing.
+ * @returns {int} Mixing index.
+ */
+function mixingIndex(index, mixing) {
     var length = ARR.length;
-    index += int;
+    index += mixing;
     while (index >= length)
         index -= length;
 

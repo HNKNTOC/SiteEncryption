@@ -7,16 +7,25 @@
 
     <script type="text/javascript">
 
-        var mixing = -2;
+        var mixing = 1;
+        var outText;
+
+        function init() {
+            mixing = parseInt(document.getElementById("inMixed").value);
+            if(mixing == null)
+                mixing = 1;
+
+            outText = document.getElementById("outText");
+        }
 
         function goCoding() {
-            var outText = document.getElementById("outText");
+            init();
             var innerHTML = document.getElementById("inText").value;
             out(outText, coding(innerHTML, mixing));
             showTable()
         }
         function goDecoding() {
-            var outText = document.getElementById("outText");
+            init();
             var innerHTML = document.getElementById("inText").value;
             out(outText, coding(innerHTML, mixing*-1));
             showTable()
@@ -31,7 +40,7 @@
             out(table1, ARR.join(','));
             var newArr = [ARR.length];
             for (var i = 0; i < ARR.length; i++) {
-                newArr[i] = ARR[extractedIndex(i, mixing)];
+                newArr[i] = ARR[mixingIndex(i, mixing)];
             }
             out(table2, newArr.join(','));
         }
@@ -52,7 +61,13 @@
     <p>
         <label>
             Enter text:<br>
-            <input id="inText" type="text" name="search">
+            <input id="inText" type="text"/>
+        </label>
+    </p>
+    <p>
+        <label>
+            Enter mixed:<br>
+            <input id="inMixed" type="text" value="1"/>
         </label>
     </p>
     <p id="outText">
