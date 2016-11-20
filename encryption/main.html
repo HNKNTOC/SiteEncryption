@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My encryption</title>
+    <script type="text/javascript" src="JuliusCaesar.js"></script>
+
+    <script type="text/javascript">
+
+        var mixing = -2;
+
+        function goCoding() {
+            var outText = document.getElementById("outText");
+            var innerHTML = document.getElementById("inText").value;
+            out(outText, coding(innerHTML, mixing));
+            showTable()
+        }
+        function goDecoding() {
+            var outText = document.getElementById("outText");
+            var innerHTML = document.getElementById("inText").value;
+            out(outText, coding(innerHTML, mixing*-1));
+            showTable()
+        }
+        function out(element, text) {
+            element.innerHTML = text;
+        }
+
+        function showTable() {
+            var table1 = document.getElementById("table1");
+            var table2 = document.getElementById("table2");
+            out(table1, ARR.join(','));
+            var newArr = [ARR.length];
+            for (var i = 0; i < ARR.length; i++) {
+                newArr[i] = ARR[extractedIndex(i, mixing)];
+            }
+            out(table2, newArr.join(','));
+        }
+
+    </script>
+</head>
+<body>
+<h1>Hello!!</h1>
+<h2>Select method encryption please.</h2>
+<div id="sidebar">
+    <p>
+        <label>
+            <select>
+                <option value="JuliusCaesar">Julius Caesar</option>
+            </select>
+        </label>
+    </p>
+    <p>
+        <label>
+            Enter text:<br>
+            <input id="inText" type="text" name="search">
+        </label>
+    </p>
+    <p id="outText">
+        This out text.
+    </p>
+    <p>
+        <input type="button" onclick="goCoding()" value="Go Coding"/>
+        <input type="button" onclick="goDecoding()" value="Go Decoding"/>
+    </p>
+    <p id="table1">
+        ...
+    </p>
+    <p id="table2">
+        ...
+    </p>
+</div>
+</body>
+</html>
