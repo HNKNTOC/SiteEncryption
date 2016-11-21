@@ -9,6 +9,7 @@
 
         var mixing = 1;
         var outText;
+        var inText;
 
         function init() {
             mixing = parseInt(document.getElementById("inMixed").value);
@@ -16,20 +17,19 @@
                 mixing = 1;
 
             outText = document.getElementById("outText");
+            inText = document.getElementById("inText").value;
         }
 
-        function goCoding() {
+        function goCoding(isCoding) {
+            var number = 1;
+            if(!isCoding)
+                number = -1;
             init();
-            var innerHTML = document.getElementById("inText").value;
-            out(outText, coding(innerHTML, mixing));
+            var text = "Result:"+ coding(inText, mixing*number);
+            out(outText,text);
             showTable()
         }
-        function goDecoding() {
-            init();
-            var innerHTML = document.getElementById("inText").value;
-            out(outText, coding(innerHTML, mixing*-1));
-            showTable()
-        }
+
         function out(element, text) {
             element.innerHTML = text;
         }
@@ -71,11 +71,11 @@
         </label>
     </p>
     <p id="outText">
-        This out text.
+        Result:
     </p>
     <p>
-        <input type="button" onclick="goCoding()" value="Go Coding"/>
-        <input type="button" onclick="goDecoding()" value="Go Decoding"/>
+        <input type="button" onclick="goCoding(true)" value="Go Coding"/>
+        <input type="button" onclick="goDecoding(false)" value="Go Decoding"/>
     </p>
     <p id="table1">
         ...

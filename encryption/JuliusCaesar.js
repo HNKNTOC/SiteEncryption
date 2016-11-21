@@ -2,7 +2,7 @@
  * Encrypts the information according to the method of Julius Caesar.
  */
 
-const alphabet = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я, ";
+const alphabet = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я,_";
 const ARR = alphabet.split(',');
 
 /**
@@ -31,7 +31,7 @@ function coding(text, mixing) {
 function mixingIndex(index, mixing) {
     var length = ARR.length;
     index += mixing;
-    return transitionExcessIndex(index,length,0);
+    return transitionExcessIndex(index,length,-1);
 }
 
 /**
@@ -55,10 +55,17 @@ function transitionExcessIndex(index, max, min) {
 test();
 
 function test() {
+
     var number = transitionExcessIndex(5,4,0);
     if(number != 1) throw "transitionExcessIndex test failed number = "+number;
 
     var mixing = mixingIndex(33,1);
-    if(mixing != 0) throw "mixingIndex test failed number = "+mixing;
+    if (mixing != 0) throw "mixingIndex test failed mixing = "+mixing;
+
+    var codingText = coding("абв_я",1);
+    if (codingText != "бвга_") throw "coding test failed codingText = "+codingText;
+
+    var codingText2 = coding("абв я",-1);
+    if (codingText2 != "_абяэ") throw "coding2 test failed codingText = "+codingText2;
 }
 
