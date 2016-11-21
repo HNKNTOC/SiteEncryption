@@ -17,7 +17,7 @@ function coding(text, mixing) {
 
     for (var i = 0; i < text.length; i++) {
         var index = ARR.indexOf(arrText[i]);
-        out = out + ARR[mixingIndex(index,mixing)];
+        out = out + ARR[mixingIndex(index, mixing)];
     }
     return out;
 }
@@ -31,10 +31,34 @@ function coding(text, mixing) {
 function mixingIndex(index, mixing) {
     var length = ARR.length;
     index += mixing;
-    while (index >= length)
-        index -= length;
+    return transitionExcessIndex(index,length,0);
+}
 
-    while (index <= -1)
-        index += length;
+/**
+ * If index not included in the range
+ * adds or takes is index until index will not be in the range.
+ * Adds and takes number max.
+ * @param index index which needs transition.
+ * @param max Max range.
+ * @param min Min range.
+ * @returns {number} Which lies on range.
+ */
+function transitionExcessIndex(index, max, min) {
+    while (index >= max)
+        index -= max;
+
+    while (index <= min)
+        index += max;
     return index;
 }
+
+test();
+
+function test() {
+    var number = transitionExcessIndex(5,4,0);
+    if(number != 1) throw "transitionExcessIndex test failed number = "+number;
+
+    var mixing = mixingIndex(33,1);
+    if(mixing != 0) throw "mixingIndex test failed number = "+mixing;
+}
+
