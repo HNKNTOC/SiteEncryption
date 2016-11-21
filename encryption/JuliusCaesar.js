@@ -31,7 +31,7 @@ function coding(text, mixing) {
 function mixingIndex(index, mixing) {
     var length = ARR.length;
     index += mixing;
-    return transitionExcessIndex(index,length,-1);
+    return transitionInRange(index,length,-1);
 }
 
 /**
@@ -43,7 +43,7 @@ function mixingIndex(index, mixing) {
  * @param min Min range.
  * @returns {number} Which lies on range.
  */
-function transitionExcessIndex(index, max, min) {
+function transitionInRange(index, max, min) {
     while (index >= max)
         index -= max;
 
@@ -56,8 +56,8 @@ test();
 
 function test() {
 
-    var number = transitionExcessIndex(5,4,0);
-    if(number != 1) throw "transitionExcessIndex test failed number = "+number;
+    var number = transitionInRange(5,4,0);
+    if(number != 1) throw "transitionInRange test failed number = "+number;
 
     var mixing = mixingIndex(33,1);
     if (mixing != 0) throw "mixingIndex test failed mixing = "+mixing;
