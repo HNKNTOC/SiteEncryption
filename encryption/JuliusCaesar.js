@@ -31,7 +31,7 @@ function coding(text, mixing) {
 function mixingIndex(index, mixing) {
     var length = ARR.length;
     index += mixing;
-    return transitionInRange(index,length,-1);
+    return transitionInRange(index,-1,length);
 }
 
 /**
@@ -43,7 +43,7 @@ function mixingIndex(index, mixing) {
  * @param min Min range.
  * @returns {number} Which lies on range.
  */
-function transitionInRange(index, max, min) {
+function transitionInRange(index, min,max) {
     while (index >= max)
         index -= max;
 
@@ -56,7 +56,7 @@ test();
 
 function test() {
 
-    var number = transitionInRange(5,4,0);
+    var number = transitionInRange(5,0,4);
     if(number != 1) throw "transitionInRange test failed number = "+number;
 
     var mixing = mixingIndex(33,1);
@@ -65,7 +65,7 @@ function test() {
     var codingText = coding("абв_я",1);
     if (codingText != "бвга_") throw "coding test failed codingText = "+codingText;
 
-    var codingText2 = coding("абв я",-1);
-    if (codingText2 != "_абяэ") throw "coding2 test failed codingText = "+codingText2;
+    var codingText2 = coding("бвга_",-1);
+    if (codingText2 != "абв_я") throw "coding2 test failed codingText = "+codingText2;
 }
 
