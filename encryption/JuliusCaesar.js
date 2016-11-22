@@ -11,15 +11,25 @@ const ARR = alphabet.split(',');
  * @param mixing The number you want to mixing alphabet for encryption.
  * @returns {string} The encrypted text.
  */
-function coding(text, mixing) {
+function encryption(text, mixing) {
     var arrText = text.split('');
     var out = "";
 
     for (var i = 0; i < text.length; i++) {
-        var index = ARR.indexOf(arrText[i]);
-        out = out + ARR[mixingIndex(index, mixing)];
+        out += extractChar(arrText[i], mixing);
     }
     return out;
+}
+
+/**
+ * Encryption char.
+ * @param char
+ * @param mixing
+ * @returns {*}
+ */
+function extractChar(char, mixing) {
+    var index = ARR.indexOf(char);
+    return ARR[mixingIndex(index, mixing)];
 }
 
 /**
@@ -31,41 +41,31 @@ function coding(text, mixing) {
 function mixingIndex(index, mixing) {
     var length = ARR.length;
     index += mixing;
-    return transitionInRange(index,-1,length);
+    return transitionInRange(index, length);
 }
 
 /**
- * If index not included in the range
- * adds or takes is index until index will not be in the range.
+ * Return a number in the range.
+ * If number not included in the range adds or takes
+ * is number until number will not be in the range.
  * Adds and takes number max.
- * @param index index which needs transition.
+ *
+ * @param number Number which needs transition.
  * @param max Max range.
- * @param min Min range.
  * @returns {number} Which lies on range.
  */
-function transitionInRange(index, min,max) {
-    while (index >= max)
-        index -= max;
+function transitionInRange(number, max) {
+    const min = -1;
+    if(0 >= max){
+        throw "Max must be greater than 0.";
+    }
+    while (min >= number || number >= max) {
 
-    while (index <= min)
-        index += max;
-    return index;
+        while (number >= max)
+            number -= max;
+
+        while (number <= min)
+            number += max;
+    }
+    return number;
 }
-
-test();
-
-function test() {
-
-    var number = transitionInRange(5,0,4);
-    if(number != 1) throw "transitionInRange test failed number = "+number;
-
-    var mixing = mixingIndex(33,1);
-    if (mixing != 0) throw "mixingIndex test failed mixing = "+mixing;
-
-    var codingText = coding("абв_я",1);
-    if (codingText != "бвга_") throw "coding test failed codingText = "+codingText;
-
-    var codingText2 = coding("бвга_",-1);
-    if (codingText2 != "абв_я") throw "coding2 test failed codingText = "+codingText2;
-}
-
