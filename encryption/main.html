@@ -4,28 +4,55 @@
     <meta charset="UTF-8">
     <title>My encryption</title>
     <script type="text/javascript" src="JuliusCaesar.js"></script>
+    <script type="text/javascript" src="PolubinskiSquare.js"></script>
 
     <script type="text/javascript">
-
-        var mixing = 1;
+        /**
+         * Mixing use for encryption text.
+         * @type {number}
+         */
+        var takenMixing = 1;
+        /**
+         * Encrypted text.
+         */
         var outText;
+        /**
+         * Not encrypted text.
+         */
         var inText;
+        /**
+         * Number method to encrypt.
+         * 0 - JuliusCaesar
+         * 1 - PolubinskiSquare
+         */
+        var methodNumber;
 
         function init() {
-            mixing = parseInt(document.getElementById("inMixed").value);
-            if(mixing == null)
-                mixing = 1;
+            takenMixing = parseInt(document.getElementById("inMixed").value);
+            if(takenMixing == null)
+                takenMixing = 1;
 
             outText = document.getElementById("outText");
             inText = document.getElementById("inText").value;
+            methodNumber = document.getElementById("selectorMethod").selectedIndex;
+        }
+
+        function selectCryptographer(number) {
+            if(number == 0){
+                return createCryptographerJuliusCaesar();
+            }
+            if(number == 1){
+                return new Cryptographer();
+            }
         }
 
         function goCoding(isCoding) {
+            init();
+            var cryp = selectCryptographer(methodNumber);
             var number = 1;
             if(!isCoding)
                 number = -1;
-            init();
-            var text = encryption(inText, mixing*number);
+            var text = cryp.encryptionText(inText, takenMixing*number);
             out(outText,text);
             showTable()
         }
@@ -40,10 +67,11 @@
             out(table1, ARR.join(','));
             var newArr = [ARR.length];
             for (var i = 0; i < ARR.length; i++) {
-                newArr[i] = ARR[mixingIndex(i, mixing)];
+                newArr[i] = ARR[mixingIndex(i, takenMixing)];
             }
             out(table2, newArr.join(','));
         }
+
 
     </script>
 </head>
@@ -53,8 +81,10 @@
 <div id="sidebar">
     <p>
         <label>
-            <select>
+            <select id="selectorMethod">
                 <option value="JuliusCaesar">Julius Caesar</option>
+                <option value="JuliusCaesar">Polubinski Square</option>
+                <option value="JuliusCaesar">123</option>
             </select>
         </label>
     </p>

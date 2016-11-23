@@ -26,11 +26,11 @@ describe("JuliusCaesar", function () {
     });
 
     it("Encryption text.", function () {
-        assert.equal(encryption("абв_я", 1), "бвга_");
+        assert.equal(encryptionText("абв_я", 1), "бвга_");
     });
 
     it("Decryption text.", function () {
-        assert.equal(encryption("бвга_", -1), "абв_я");
+        assert.equal(encryptionText("бвга_", -1), "абв_я");
     });
 
 });
