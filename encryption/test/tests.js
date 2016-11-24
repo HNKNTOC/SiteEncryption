@@ -21,22 +21,43 @@ describe("Main", function () {
 
     });
 
-    describe("JuliusCaesar", function () {
-        var cryp = createCryptographerJuliusCaesar();
-        it("Get index for mixed alphabet.", function () {
-            assert.equal(cryp.mixingIndex(33, 1), 0);
-        });
-
-        it("Encryption text.", function () {
-            assert.equal(cryp.encryptionText("абв_я", 1), "бвга_");
-        });
-
-        it("Decryption text.", function () {
-            assert.equal(cryp.encryptionText("бвга_", -1), "абв_я");
-        });
-    });
     describe("PolubinskiSquare", function () {
-        //TODO Add Test for PolubinskiSquare.
+        var crypt = new Cryptographer();
+        it("Get index for mixed alphabetText.", function () {
+            var index = crypt.alphabet.length;
+            assert.equal(crypt.mixingIndex(index-1, 1), 0);
+        });
+        it("CheckEncryptionText", function () {
+            checkEncryptionText(crypt,"абв_я","ёжзгв",1);
+        });
+        it("CheckDecryptionText", function () {
+            checkDecryptionText(crypt,"абв_я","ёжзгв",1);
+        });
     });
+
+    describe("JuliusCaesar", function () {
+        var crypt = createCryptographerJuliusCaesar();
+        it("Get index for mixed alphabetText.", function () {
+            var index = crypt.alphabet.length;
+            assert.equal(crypt.mixingIndex(index-1, 1), 0);
+        });
+
+        it("CheckEncryptionText", function () {
+            checkEncryptionText(crypt,"абв_я","бвга_",1);
+        });
+        it("CheckDecryptionText", function () {
+            checkDecryptionText(crypt,"абв_я","бвга_",1);
+        });
+    });
+
+    function checkEncryptionText(crypt,text,textEncryption,mixed) {
+        var outEncryption = crypt.encryptionText(text,mixed);
+        assert.equal(outEncryption, textEncryption,"Failed Encryption text");
+    }
+
+    function checkDecryptionText(crypt,text,textEncryption,mixed) {
+        var outDecryption = crypt.encryptionText(textEncryption, mixed * -1);
+        assert.equal(outDecryption, text, "Failed Decryption text");
+    }
 
 });

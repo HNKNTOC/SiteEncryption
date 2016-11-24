@@ -2,21 +2,21 @@
  * Encrypts the information according to the method of Julius Caesar.
  */
 
-const alphabet = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я,_";
-const ARR = alphabet.split(',');
-
 
 function createCryptographerJuliusCaesar() {
+    const alphabetText = "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я,_";
+    const alphabet = alphabetText.split(',');
+
     var crypt = new Cryptographer();
+    crypt.alphabet = alphabet;
     crypt.encryptionText = encryptionText;
     crypt.encryptionChar = encryptionChar;
-    crypt.mixingIndex = mixingIndex;
     return crypt;
 
     /**
      *  Encryption text.
      * @param text The text you want to encryptionText.
-     * @param mixing The number you want to mixing alphabet for encryptionText.
+     * @param mixing The number you want to mixing alphabetText for encryptionText.
      * @returns {string} The encrypted text.
      */
     function encryptionText(text, mixing) {
@@ -36,19 +36,7 @@ function createCryptographerJuliusCaesar() {
      * @returns {*}
      */
     function encryptionChar(char, mixing) {
-        var index = ARR.indexOf(char);
-        return ARR[mixingIndex(index, mixing)];
-    }
-
-    /**
-     * Get index for mixed alphabet.
-     * @param index not mixed index.
-     * @param mixing on much want mixing.
-     * @returns {int} Mixing index.
-     */
-    function mixingIndex(index, mixing) {
-        var length = ARR.length;
-        index += mixing;
-        return transitionInRange(index, length);
+        var index = alphabet.indexOf(char);
+        return alphabet[crypt.mixingIndex(index, mixing)];
     }
 }

@@ -2,7 +2,7 @@
  * Encrypts the information according to the method of Polubinski Square.
  */
 function Cryptographer() {
-    const alphabet2 =
+    this.alphabet =
         [
             ["а", "б", "в", "г", "д", "е"],
             ["ё", "ж", "з", "и", "й", "к"],
@@ -30,23 +30,23 @@ function Cryptographer() {
      */
     this.encryptionChar = function (char, mixing) {
         var i = 0;
-        for (; i < alphabet2.length; i++) {
-            var index = alphabet2[i].indexOf(char);
+        for (; i < this.alphabet.length; i++) {
+            var index = this.alphabet[i].indexOf(char);
             if (index != -1) {
-                return alphabet2[this.mixingIndex(i, mixing)][index];
+                return this.alphabet[this.mixingIndex(i, mixing)][index];
             }
         }
-        throw "Failed find char in alphabet.";
+        throw "Failed find char in alphabetText.";
     };
 
     /**
-     * Get index for mixed alphabet.
+     * Get index for mixed alphabetText.
      * @param index not mixed index.
      * @param mixing on much want mixing.
      * @returns {int} Mixing index.
      */
     this.mixingIndex = function (index, mixing) {
-        var length = alphabet2.length;
+        var length = this.alphabet.length;
         index += mixing;
         return transitionInRange(index, length);
     };

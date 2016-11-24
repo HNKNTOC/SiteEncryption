@@ -64,10 +64,10 @@
         function showTable() {
             var table1 = document.getElementById("table1");
             var table2 = document.getElementById("table2");
-            out(table1, ARR.join(','));
-            var newArr = [ARR.length];
-            for (var i = 0; i < ARR.length; i++) {
-                newArr[i] = ARR[mixingIndex(i, takenMixing)];
+            out(table1, alphabet.join(','));
+            var newArr = [alphabet.length];
+            for (var i = 0; i < alphabet.length; i++) {
+                newArr[i] = alphabet[mixingIndex(i, takenMixing)];
             }
             out(table2, newArr.join(','));
         }
