@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>My encryption</title>
-    <script type="text/javascript" src="JuliusCaesar.js"></script>
-    <script type="text/javascript" src="PolubinskiSquare.js"></script>
+    <script type="text/javascript" src="methods/JuliusCaesar.js"></script>
+    <script type="text/javascript" src="methods/PolubinskiSquare.js"></script>
 
     <script type="text/javascript">
         /**
@@ -39,7 +39,7 @@
 
         function selectCryptographer(number) {
             if(number == 0){
-                return createCryptographerJuliusCaesar();
+                return JuliusCaesar();
             }
             if(number == 1){
                 return new Cryptographer();

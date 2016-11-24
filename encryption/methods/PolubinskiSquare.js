@@ -12,6 +12,12 @@ function Cryptographer() {
             ["э", "ю", "я", "_", "(", ")"]
         ];
 
+    /**
+     *  Encryption text.
+     * @param text The text you want to encryptionText.
+     * @param mixing The number you want to mixing for text encryption.
+     * @returns {string} The encrypted text.
+     */
     this.encryptionText = function (text, mixing) {
         var arrText = text.split('');
         var out = "";
@@ -33,22 +39,10 @@ function Cryptographer() {
         for (; i < this.alphabet.length; i++) {
             var index = this.alphabet[i].indexOf(char);
             if (index != -1) {
-                return this.alphabet[this.mixingIndex(i, mixing)][index];
+                return this.alphabet[mixingIndex(i, mixing,this.alphabet.length)][index];
             }
         }
         throw "Failed find char in alphabetText.";
-    };
-
-    /**
-     * Get index for mixed alphabetText.
-     * @param index not mixed index.
-     * @param mixing on much want mixing.
-     * @returns {int} Mixing index.
-     */
-    this.mixingIndex = function (index, mixing) {
-        var length = this.alphabet.length;
-        index += mixing;
-        return transitionInRange(index, length);
     };
 }
 
@@ -76,4 +70,17 @@ function transitionInRange(number, max) {
             number += max;
     }
     return number;
+}
+
+/**
+ * Get mixedIndex.
+ * Add mixing at index and transitionInRange() result.
+ * @param index not mixed index.
+ * @param mixing on much want mixing.
+ * @param max Max size for range.
+ * @returns {int} Mixing index.
+ */
+function mixingIndex(index, mixing,max) {
+    index += mixing;
+    return transitionInRange(index, max);
 }
