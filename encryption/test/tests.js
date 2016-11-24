@@ -44,10 +44,6 @@ describe("Main", function () {
 
     describe("JuliusCaesar", function () {
         var crypt = createCryptographerJuliusCaesar();
-        it("Get index for mixed alphabetText.", function () {
-            var index = crypt.alphabet.length;
-            assert.equal(crypt.mixingIndex(index-1, 1), 0);
-        });
 
         it("CheckEncryptionText", function () {
             checkEncryptionText(crypt,"абв_я","бвга_",1);

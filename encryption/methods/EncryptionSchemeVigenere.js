@@ -1,7 +1,7 @@
 /**
  * Encrypts the information according to the method  The encryption scheme of Vigenere.
  */
-function createCryptographerJuliusCaesar() {
+function createEncryptionSchemeVigenere() {
     const alphabetText =
         "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п," +
         "р,с,т,у,ф,х,ц,ч,ш,щ,ъ,ы,ь,ю,э,я,_";
