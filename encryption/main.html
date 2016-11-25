@@ -5,6 +5,7 @@
     <title>My encryption</title>
     <script type="text/javascript" src="methods/JuliusCaesar.js"></script>
     <script type="text/javascript" src="methods/PolubinskiSquare.js"></script>
+    <script type="text/javascript" src="methods/EncryptionSchemeVigenere.js"></script>
 
     <script type="text/javascript">
         /**
@@ -44,15 +45,20 @@
             if(number == 1){
                 return new Cryptographer();
             }
+            if(number == 2){
+                const crypt = createEncryptionSchemeVigenere();
+                crypt.key = "лол";
+                return crypt;
+            }
         }
 
         function goCoding(isCoding) {
             init();
-            var cryp = selectCryptographer(methodNumber);
+            var crypt = selectCryptographer(methodNumber);
             var number = 1;
             if(!isCoding)
                 number = -1;
-            var text = cryp.encryptionText(inText, takenMixing*number);
+            var text = crypt.encryptionText(inText, takenMixing*number);
             out(outText,text);
             showTable()
         }
@@ -84,7 +90,7 @@
             <select id="selectorMethod">
                 <option value="JuliusCaesar">Julius Caesar</option>
                 <option value="JuliusCaesar">Polubinski Square</option>
-                <option value="JuliusCaesar">123</option>
+                <option value="JuliusCaesar">EncryptionSchemeVigenere</option>
             </select>
         </label>
     </p>

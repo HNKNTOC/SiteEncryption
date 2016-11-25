@@ -74,13 +74,13 @@ function transitionInRange(number, max) {
 
 /**
  * Get mixedIndex.
- * Add mixing at index and transitionInRange() result.
+ * Add mixed at index and transitionInRange() result.
  * @param index not mixed index.
- * @param mixing on much want mixing.
+ * @param mixed on much want mixed.
  * @param max Max size for range.
  * @returns {int} Mixing index.
  */
-function mixingIndex(index, mixing,max) {
-    index += mixing;
+function mixingIndex(index, mixed,max) {
+    index += mixed;
     return transitionInRange(index, max);
 }

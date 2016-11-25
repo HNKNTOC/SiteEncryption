@@ -1,8 +1,6 @@
 /**
  * Encrypts the information according to the method of Julius Caesar.
  */
-
-
 function createCryptographerJuliusCaesar() {
     const alphabetText =
         "а,б,в,г,д,е,ё,ж,з,и,й,к,л,м,н,о,п,р," +
@@ -11,35 +9,19 @@ function createCryptographerJuliusCaesar() {
 
     var crypt = new Cryptographer();
     crypt.alphabet = alphabet;
-    crypt.encryptionText = encryptionText;
     crypt.encryptionChar = encryptionChar;
     return crypt;
 
-    /**
-     *  Encryption text.
-     * @param text The text you want to encryptionText.
-     * @param mixing The number you want to mixing for text encryption.
-     * @returns {string} The encrypted text.
-     */
-    function encryptionText(text, mixing) {
-        var arrText = text.split('');
-        var out = "";
-
-        for (var i = 0; i < text.length; i++) {
-            out += encryptionChar(arrText[i], mixing);
-        }
-        return out;
-    }
 
     /**
      * Encryption char.
      * @param char Char which you want encryption.
-     * @param mixing The number you want to mixing for char encryption.
+     * @param mixed The number you want to mixed for char encryption.
      * @returns {*} Char encrypted.
      */
-    function encryptionChar(char, mixing) {
+    function encryptionChar(char, mixed) {
         var index = alphabet.indexOf(char);
-        return alphabet[mixingIndex(index, mixing,alphabet.length)];
+        return alphabet[mixingIndex(index, mixed, alphabet.length)];
     }
 }
 
@@ -49,10 +31,10 @@ function createCryptographerJuliusCaesar() {
  * @param mixed The number you want to mixing for alphabet encryption.
  * @returns {[*]} Alphabet encrypted.
  */
-function createEncryptionAlphabet(alphabet,mixed) {
+function createEncryptionAlphabet(alphabet, mixed) {
     var alphabetOut = [alphabet.length];
     for (var i = 0; i < alphabet.length; i++) {
-        alphabetOut[mixingIndex(i,mixed,alphabet.length)] = alphabet[i];
+        alphabetOut[mixingIndex(i, mixed, alphabet.length)] = alphabet[i];
     }
     return alphabetOut;
 }
