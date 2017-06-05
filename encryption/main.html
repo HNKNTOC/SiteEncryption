@@ -60,14 +60,14 @@
                 number = -1;
             var text = crypt.encryptionText(inText, takenMixing*number);
             out(outText,text);
-            showTable()
+            showTable(crypt.alphabet)
         }
 
         function out(element, text) {
             element.innerHTML = text;
         }
 
-        function showTable() {
+        function showTable(alphabet) {
             var table1 = document.getElementById("table1");
             var table2 = document.getElementById("table2");
             out(table1, alphabet.join(','));
